@@ -1,0 +1,18 @@
+cloud:
+    aws:
+        credentials:
+            accessKey: FAKEKEY
+            secretKey: FAKEKEY
+            instanceProfile: false
+        region:
+            auto: false
+            static: us-west-2
+
+endpoints:
+    enabled: true
+    sensitive: false
+
+spring:
+    redis:
+        host: example-elasticache.cssx8g.0001.usw2.cache.amazonaws.com
+        port: 6379
