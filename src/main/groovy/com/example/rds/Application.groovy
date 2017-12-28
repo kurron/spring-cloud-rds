@@ -3,9 +3,7 @@ package com.example.rds
 import groovy.util.logging.Slf4j
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.cache.annotation.Cacheable
-import org.springframework.cloud.aws.cache.config.annotation.CacheClusterConfig
-import org.springframework.cloud.aws.cache.config.annotation.EnableElastiCache
+import org.springframework.cloud.aws.jdbc.config.annotation.EnableRdsInstance
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @Slf4j
 @SpringBootApplication
 @RestController
-@EnableElastiCache( @CacheClusterConfig( name= 'example-rds', expiration = 30 ) )
+@EnableRdsInstance( dbInstanceIdentifier = 'sample', password = 'masterpassword' )
 class Application {
 
     @GetMapping( path = '/echo/{id}' )
@@ -22,7 +20,6 @@ class Application {
         slowResource( id )
     }
 
-    @Cacheable( 'SimpleCache' )
     String slowResource( String key ) {
         log.info( 'Calculating expensive resource {}', key )
         Thread.sleep( 1000 * 4 )
@@ -32,4 +29,5 @@ class Application {
     static void main( String[] args ) {
         SpringApplication.run Application, args
     }
+
 }

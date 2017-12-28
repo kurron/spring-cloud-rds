@@ -7,12 +7,20 @@ cloud:
         region:
             auto: false
             static: us-west-2
+    rds:
+        sample:
+            password: masterpassword
+            username: master
+            readReplicaSupport: true
+            databaseName: sample
+
 
 endpoints:
     enabled: true
     sensitive: false
 
 spring:
-    redis:
-        host: example-rds.cssx8g.0001.usw2.cache.amazonaws.com
-        port: 6379
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: create-drop
