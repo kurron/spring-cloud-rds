@@ -1,4 +1,4 @@
-package com.example.elasticache
+package com.example.rds
 
 import groovy.util.logging.Slf4j
 import org.springframework.boot.SpringApplication
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @Slf4j
 @SpringBootApplication
 @RestController
-@EnableElastiCache( @CacheClusterConfig( name= 'example-elasticache', expiration = 30 ) )
+@EnableElastiCache( @CacheClusterConfig( name= 'example-rds', expiration = 30 ) )
 class Application {
 
     @GetMapping( path = '/echo/{id}' )
