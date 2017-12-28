@@ -1,12 +1,12 @@
 # Overview
-This project is a sample that helps to showcase how Spring supports [Amazon ElastiCache (Redis)](https://aws.amazon.com/elasticache/).  Using the proper annotations, data can be temporarily stored in Redis for faster access. 
+This project is a sample that helps to showcase how Spring supports [Amazon Relational Database Service](https://aws.amazon.com/rds/).  Hibernate is the ORM that sits atop the Spring infrastructure managing the connection to RDS. 
 
 # Guidebook
 Details about this project are contained in the [guidebook](guidebook/guidebook.md) and should be considered mandatory reading prior to contributing to this project.
 
 # Prerequisites
 * [JDK 8](http://zulu.org/) installed and working
-* a configured ElastiCache -- a single server is fine but a cluster works just as well 
+* a configured RDS instance (MySQL) 
 
 # Building
 `./gradlew` will pull down any dependencies, compile the source and package everything up.
@@ -21,8 +21,6 @@ Edit `application.yml`, inserting your API keys.
 **TODO:** add output from the program 
 
 # Troubleshooting
-## Network Access
-ElastiCache is only accessible from within a VPC [unless special configurations are in place](http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Access.Outside.html).
 
 # Contributing
 
