@@ -20,14 +20,14 @@ class Address {
     private Long id
 
     @JsonProperty
-    @Column(nullable = false)
+    @Column( nullable = false )
     private String street
 
     @JsonProperty
-    @Column(nullable = false)
+    @Column( nullable = false )
     private Integer zipcode
 
-    @JsonProperty
+    // don't bring back the parent or Jackson dies trying to deal with the circular references
     @ManyToOne( optional = false )
     private Person person
 
