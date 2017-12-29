@@ -3,6 +3,7 @@ package com.example.rds
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.Canonical
 import javax.persistence.Column
+import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -20,7 +21,8 @@ class Person {
     private String name
 
     @JsonProperty
-    private OnlineAccount account
+    @ElementCollection
+    private List<OnlineAccount> accounts = new ArrayList<>( 32 )
 
     // required by JPA
     Person() {}

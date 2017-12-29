@@ -35,10 +35,12 @@ class Application {
     }
 
     private static Person construct( String name ) {
-        def account = new OnlineAccount( account: randomString(),
-                                         username: randomString(),
-                                         password: randomString() )
-        new Person( name: name, account: account )
+        def accounts = (1..4).collect {
+            new OnlineAccount( account: randomString(),
+                               username: randomString(),
+                               password: randomString() )
+        }
+        new Person( name: name, accounts: accounts )
     }
 
     static String randomString() {
