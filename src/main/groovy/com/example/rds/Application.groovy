@@ -30,8 +30,17 @@ class Application {
     @PostMapping( path = '/person/{name}', produces = 'application/json' )
     Person addResource( @PathVariable( name = 'name' ) String name ) {
         log.info( 'Adding person {}', name )
-        Person found = repository.save( construct( name ) )
-        found
+        Person stored = repository.save( construct( name ) )
+        def associatedAddresses = construct( stored )
+        stored
+    }
+
+    private List<Address> construct( Person person ) {
+        def addresses = (1..2).collect {
+            new Address( person: person, street: randomString(), zipcode: randomNumber() )
+        }
+        List<Address> associated = repository.save( addresses ).toList()
+        associated
     }
 
     private static Person construct( String name ) {
@@ -40,6 +49,7 @@ class Application {
                                username: randomString(),
                                password: randomString() )
         }
+
         new Person( name: name, accounts: accounts )
     }
 
@@ -47,6 +57,9 @@ class Application {
         Integer.toHexString( ThreadLocalRandom.current().nextInt( Integer.MAX_VALUE ) ).toUpperCase()
     }
 
+    static int randomNumber() {
+        ThreadLocalRandom.current().nextInt( Integer.MAX_VALUE )
+    }
     static void main( String[] args ) {
         SpringApplication.run Application, args
     }
