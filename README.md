@@ -16,7 +16,7 @@ Nothing to install.
 
 # Tips and Tricks
 ## Starting The Server
-Edit `application.yml`, inserting your API keys and RDS credentials.
+Edit `application.yml`, inserting your API keys and RDS credentials, followed by `./gradlew bootRun`.
 
 ## Adding Data
 The application supports `POST`ing to `/person/{name}` which inserts data into the database.  For example, `curl --silent --show-error --request POST localhost:8080/person/bob | python -m json.tool` gives you something like this:
