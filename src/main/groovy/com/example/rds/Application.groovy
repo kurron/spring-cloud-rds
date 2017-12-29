@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.cloud.aws.jdbc.config.annotation.EnableRdsInstance
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -23,6 +24,7 @@ class Application {
     @Autowired
     AddressRepository addressRepository
 
+    @Transactional( readOnly = true )
     @GetMapping( path = '/person/{id}', produces = 'application/json' )
     Person fetchPerson( @PathVariable( name = 'id' ) Long id ) {
         log.info( 'Searching for person {}', id )
@@ -30,6 +32,7 @@ class Application {
         found.orElse( new Person( id: 0, name: 'no such person' ) )
     }
 
+    @Transactional( readOnly = false )
     @PostMapping( path = '/person/{name}', produces = 'application/json' )
     Person addResource( @PathVariable( name = 'name' ) String name ) {
         log.info( 'Adding person {}', name )
@@ -38,8 +41,9 @@ class Application {
         stored
     }
 
+    @Transactional( readOnly = true )
     @GetMapping( path = '/address/{id}', produces = 'application/json' )
-    Address fetchAdress( @PathVariable( name = 'id' ) Long id ) {
+    Address fetchAddress( @PathVariable( name = 'id' ) Long id ) {
         log.info( 'Searching for address {}', id )
         Optional<Address> found = Optional.ofNullable( addressRepository.findOne( id ) )
         found.orElse( new Address( id: 0, street: 'no such address', zipcode: 0 ) )
