@@ -27,6 +27,7 @@ class Address {
     @Column(nullable = false)
     private Integer zipcode
 
+    @JsonProperty
     @ManyToOne( optional = false )
     private Person person
 

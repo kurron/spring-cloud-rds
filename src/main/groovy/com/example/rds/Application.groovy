@@ -18,28 +18,38 @@ import org.springframework.web.bind.annotation.RestController
 class Application {
 
     @Autowired
-    PersonRepository repository
+    PersonRepository personRepository
+
+    @Autowired
+    AddressRepository addressRepository
 
     @GetMapping( path = '/person/{id}', produces = 'application/json' )
-    Person fetchResource( @PathVariable( name = 'id' ) Long id ) {
+    Person fetchPerson( @PathVariable( name = 'id' ) Long id ) {
         log.info( 'Searching for person {}', id )
-        Optional<Person> found = Optional.ofNullable( repository.findOne( id ) )
+        Optional<Person> found = Optional.ofNullable( personRepository.findOne( id ) )
         found.orElse( new Person( id: 0, name: 'no such person' ) )
     }
 
     @PostMapping( path = '/person/{name}', produces = 'application/json' )
     Person addResource( @PathVariable( name = 'name' ) String name ) {
         log.info( 'Adding person {}', name )
-        Person stored = repository.save( construct( name ) )
-        def associatedAddresses = construct( stored )
+        Person stored = personRepository.save( construct( name ) )
+        construct( stored )
         stored
+    }
+
+    @GetMapping( path = '/address/{id}', produces = 'application/json' )
+    Address fetchAdress( @PathVariable( name = 'id' ) Long id ) {
+        log.info( 'Searching for address {}', id )
+        Optional<Address> found = Optional.ofNullable( addressRepository.findOne( id ) )
+        found.orElse( new Address( id: 0, street: 'no such address', zipcode: 0 ) )
     }
 
     private List<Address> construct( Person person ) {
         def addresses = (1..2).collect {
             new Address( person: person, street: randomString(), zipcode: randomNumber() )
         }
-        List<Address> associated = repository.save( addresses ).toList()
+        List<Address> associated = personRepository.save( addresses ).toList()
         associated
     }
 
