@@ -6,7 +6,7 @@ Details about this project are contained in the [guidebook](guidebook/guidebook.
 
 # Prerequisites
 * [JDK 8](http://zulu.org/) installed and working
-* a configured RDS instance (MySQL) named `sample` 
+* a configured RDS instance (Aurora or MySQL) named `sample` 
 
 # Building
 `./gradlew` will pull down any dependencies, compile the source and package everything up.
