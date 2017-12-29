@@ -1,7 +1,7 @@
 package com.example.rds
 
-import org.springframework.data.repository.Repository
+import org.springframework.data.repository.CrudRepository
 
-interface PersonRepository extends Repository<Person, Long> {
+interface PersonRepository extends CrudRepository<Person, Long> {
 
 }
