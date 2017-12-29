@@ -3,11 +3,9 @@ package com.example.rds
 import com.fasterxml.jackson.annotation.JsonProperty
 import groovy.transform.Canonical
 import javax.persistence.Column
-import javax.persistence.ElementCollection
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 
 /**
@@ -29,8 +27,7 @@ class Address {
     @Column(nullable = false)
     private Integer zipcode
 
-    @ManyToOne
-    @JoinColumn( name = 'person_id', nullable = false )
+    @ManyToOne( optional = false )
     private Person person
 
     // required by JPA
