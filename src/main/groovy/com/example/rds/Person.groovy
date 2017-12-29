@@ -19,6 +19,9 @@ class Person {
     @Column(nullable = false)
     private String name
 
+    @JsonProperty
+    private OnlineAccount account
+
     // required by JPA
     Person() {}
 }
