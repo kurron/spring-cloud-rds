@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @Slf4j
 @SpringBootApplication
 @RestController
+// I cannot figure out how NOT to hard code the password. So sad.
 @EnableRdsInstance( dbInstanceIdentifier = 'sample', password = 'masterpassword' )
 class Application {
 
