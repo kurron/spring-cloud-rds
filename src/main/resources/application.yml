@@ -7,12 +7,13 @@ cloud:
         region:
             auto: false
             static: us-west-2
-    rds:
-        sample:
-            password: masterpassword
-            username: master
-            readReplicaSupport: true
-            databaseName: sample
+        rds:
+            sample:
+                username: master
+                password: masterpassword
+                databaseName: sample
+                # Spring casts all of these properties to String so we can't have Yaml use a boolean value
+                readReplicaSupport: "true"
 
 
 endpoints:
